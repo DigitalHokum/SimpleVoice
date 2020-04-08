@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0FB6ED24-8E9A-4F15-9BBE-AF42D43AA50F}"
+ProjectSection(SolutionItems) = preProject
+	omnisharp.json = omnisharp.json
+	template.yaml = template.yaml
+	README.md = README.md
+	.gitignore = .gitignore
+EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheTrailNorth", "TheTrailNorth\TheTrailNorth.csproj", "{378EB0DE-D962-40E8-BABA-B44F1139C337}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheTrailNorth.Tests", "TheTrailNorth.Test\TheTrailNorth.Tests.csproj", "{571C9E8C-590A-44EB-B53E-51AA9EE5A8F3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{378EB0DE-D962-40E8-BABA-B44F1139C337}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{378EB0DE-D962-40E8-BABA-B44F1139C337}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{378EB0DE-D962-40E8-BABA-B44F1139C337}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{378EB0DE-D962-40E8-BABA-B44F1139C337}.Release|Any CPU.Build.0 = Release|Any CPU
+		{571C9E8C-590A-44EB-B53E-51AA9EE5A8F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{571C9E8C-590A-44EB-B53E-51AA9EE5A8F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{571C9E8C-590A-44EB-B53E-51AA9EE5A8F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{571C9E8C-590A-44EB-B53E-51AA9EE5A8F3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

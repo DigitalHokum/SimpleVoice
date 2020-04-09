@@ -4,7 +4,12 @@ using System.Reflection;
 
 namespace SimpleVoice
 {
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
+    public interface IRequestHandler
+    {
+        RequestHandlerResponse Handle(RequestData data);
+    }
+
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class RequestHandler : Attribute
     {
         // Built-in intents
@@ -15,17 +20,23 @@ namespace SimpleVoice
         public static readonly string HelpIntent = "AMAZON.HelpIntent";
 
         public readonly string Name;
-        private MethodInfo _methodInfo;
-        public MethodInfo MethodInfo => _methodInfo;
+        private Type _type;
+        public Type Type => _type;
 
         public RequestHandler(string name)
         {
             Name = name;
         }
 
-        public void RegisterMethod(MethodInfo methodInfo)
+        public void Register(Type type)
         {
-            _methodInfo = methodInfo;
+            _type = type;
+        }
+
+        public RequestHandlerResponse Resolve(RequestData data)
+        {
+             IRequestHandler obj = (IRequestHandler) Activator.CreateInstance(_type);
+             return obj.Handle(data);
         }
     }
 

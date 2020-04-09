@@ -5,6 +5,7 @@ using Alexa.NET.Request.Type;
 using Alexa.NET.Response;
 using Xunit;
 using Amazon.Lambda.TestUtilities;
+using SimpleVoice;
 
 namespace TheTrailNorth.Tests
 {
@@ -39,11 +40,10 @@ namespace TheTrailNorth.Tests
                 }
             };
 
-            var function = new Function();
-            var response = function.AlexaHandler(request, context);
-
-            Assert.Equal(expectedResponse.Response.Reprompt.ToString(), response.Response.Reprompt.ToString());
-            Assert.Equal(expectedResponse.Response.OutputSpeech.ToString(), response.Response.OutputSpeech.ToString());
+            var function = new VoiceHandler();
+            var response = function.LambdaHandler(request, context);
+            Assert.Equal(((PlainTextOutputSpeech)(expectedResponse.Response.Reprompt.OutputSpeech)).Text, ((PlainTextOutputSpeech)(response.Response.Reprompt.OutputSpeech)).Text);
+            Assert.Equal(((SsmlOutputSpeech)(expectedResponse.Response.OutputSpeech)).Ssml, ((SsmlOutputSpeech)(response.Response.OutputSpeech)).Ssml);
         }
     }
 }

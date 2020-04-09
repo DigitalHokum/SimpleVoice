@@ -11,39 +11,41 @@ namespace SimpleVoice
     public class VoiceHandler
     {
 
-        private Dictionary<string, RequestHandler> _intents;
+        private Dictionary<string, RequestHandler> _handlers;
         
         public VoiceHandler()
         {
-            Type t = GetType();
-            var methods = t.GetMethods();
-            _intents = new Dictionary<string, RequestHandler>();
-
-            foreach (MethodInfo methodInfo in methods)
+            _handlers = new Dictionary<string, RequestHandler>();
+            
+            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies()) 
             {
-                RequestHandler[] intents = (RequestHandler[]) methodInfo.GetCustomAttributes(typeof(RequestHandler));
-                foreach (RequestHandler intent in intents)
+                foreach (Type type in assembly.GetTypes())
                 {
-                    intent.RegisterMethod(methodInfo);
-                    _intents.Add(intent.Name, intent);
+                    RequestHandler[] handlers = (RequestHandler[]) type.GetCustomAttributes(typeof(RequestHandler), false);
+                    if (handlers.Length > 0)
+                    {
+                        foreach (RequestHandler handler in handlers)
+                        {
+                            handler.Register(type);
+                            _handlers.Add(handler.Name, handler);
+                        }
+                    }
                 }
             }
         }
 
-        private RequestHandler GetIntent(string name)
+        private RequestHandler GetHandler(string name)
         {
-            return _intents.ContainsKey(name) ? _intents[name] : null;
+            return _handlers.ContainsKey(name) ? _handlers[name] : null;
         }
 
         [LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
-        public SkillResponse AlexaHandler(SkillRequest input, ILambdaContext context)
+        public SkillResponse LambdaHandler(SkillRequest input, ILambdaContext context)
         {
             SkillResponse response = new SkillResponse();
             ResponseBody responseBody = new ResponseBody();
             response.Response = responseBody;
             responseBody.ShouldEndSession = false;
-
-            IOutputSpeech innerResponse = null;
 
             Type requestType = input.GetRequestType();
             string intentName;
@@ -64,13 +66,13 @@ namespace SimpleVoice
                 intentName = RequestHandler.FallbackIntent;
             }
 
-            RequestHandler requestHandler = GetIntent(intentName);
+            RequestHandler requestHandler = GetHandler(intentName);
 
             if (requestHandler != null)
             {
-                RequestHandlerResponse requestHandlerResponse = (RequestHandlerResponse) requestHandler.MethodInfo.Invoke(this, new object[] {data});
+                RequestHandlerResponse requestHandlerResponse = requestHandler.Resolve(data);
                 responseBody.OutputSpeech = new SsmlOutputSpeech(requestHandlerResponse.Speech);
-                responseBody.Reprompt = new Reprompt(requestHandlerResponse.Speech);
+                responseBody.Reprompt = new Reprompt(requestHandlerResponse.Reprompt);
             }
 
             return response;

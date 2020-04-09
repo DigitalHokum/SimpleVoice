@@ -42,7 +42,14 @@ namespace SimpleVoice
         [LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
         public SkillResponse LambdaHandler(SkillRequest input, ILambdaContext context)
         {
-            SkillResponse response = new SkillResponse();
+            SkillResponse response = new SkillResponse()
+            {
+                Version = "1.0",
+                SessionAttributes = new Dictionary<string, object>()
+                {
+                    {"Launched", true}
+                }
+            };
             ResponseBody responseBody = new ResponseBody();
             response.Response = responseBody;
             responseBody.ShouldEndSession = false;

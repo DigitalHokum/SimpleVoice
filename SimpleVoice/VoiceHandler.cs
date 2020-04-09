@@ -6,7 +6,6 @@ using Alexa.NET.Request.Type;
 using Alexa.NET.Response;
 using Amazon.Lambda.Core;
 
-[assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
 namespace SimpleVoice
 {
     public class VoiceHandler
@@ -36,6 +35,7 @@ namespace SimpleVoice
             return _intents.ContainsKey(name) ? _intents[name] : null;
         }
 
+        [LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
         public SkillResponse AlexaHandler(SkillRequest input, ILambdaContext context)
         {
             SkillResponse response = new SkillResponse();

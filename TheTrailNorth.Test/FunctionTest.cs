@@ -1,43 +1,49 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Net.Http;
 using Alexa.NET.Request;
+using Alexa.NET.Request.Type;
 using Alexa.NET.Response;
 using Xunit;
 using Amazon.Lambda.TestUtilities;
 
 namespace TheTrailNorth.Tests
 {
-  public class FunctionTest
-  {
-    private static readonly HttpClient client = new HttpClient();
-
-    [Fact]
-    public async Task TestHelloWorldFunctionHandler()
+    public class FunctionTest
     {
-            var request = new SkillRequest();
-            var context = new TestLambdaContext();
-            string location = "Unknown";
-            
-            Dictionary<string, string> body = new Dictionary<string, string>
+        [Fact]
+        public async Task TestIntent()
+        {
+            var request = new SkillRequest()
             {
-                { "message", "hello world" },
-                { "location", location },
+            };
+            var context = new TestLambdaContext();
+
+            request.Request = new IntentRequest()
+            {
+                Intent = new Intent()
+                {
+                    Name = "TestIntent",
+                    Slots = new Dictionary<string, Slot>()
+                    {
+                        {"Test", new Slot() {Value = "Test"}}
+                    }
+                }
             };
 
-            var expectedResponse = new SkillResponse();
+            var expectedResponse = new SkillResponse
+            {
+                Response = new ResponseBody()
+                {
+                    Reprompt = new Reprompt("Test Reprompt"),
+                    OutputSpeech = new SsmlOutputSpeech("Test Speech")
+                }
+            };
 
             var function = new Function();
             var response = function.AlexaHandler(request, context);
 
-            /*
-            Console.WriteLine("Lambda Response: \n" + response.Body);
-            Console.WriteLine("Expected Response: \n" + expectedResponse.Body);
-
-            Assert.Equal(expectedResponse.Body, response.Body);
-            Assert.Equal(expectedResponse.Headers, response.Headers);
-            Assert.Equal(expectedResponse.StatusCode, response.StatusCode);
-            */
+            Assert.Equal(expectedResponse.Response.Reprompt.ToString(), response.Response.Reprompt.ToString());
+            Assert.Equal(expectedResponse.Response.OutputSpeech.ToString(), response.Response.OutputSpeech.ToString());
+        }
     }
-  }
 }

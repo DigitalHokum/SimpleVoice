@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 
-namespace SimpleVoice
+namespace SimpleVoice.Handlers
 {
     public interface IRequestHandler
     {
         RequestHandlerResponse Handle(RequestData data);
     }
 
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Class)]
     public class RequestHandler : Attribute
     {
         // Built-in intents

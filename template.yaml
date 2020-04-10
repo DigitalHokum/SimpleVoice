@@ -13,7 +13,7 @@ Resources:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: ./TheTrailNorth
-      Handler: SimpleVoice::SimpleVoice.VoiceHandler::LambdaHandler
+      Handler: SimpleVoice::SimpleVoice.Entry.Lambda::Handle
       Runtime: dotnetcore2.1
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:

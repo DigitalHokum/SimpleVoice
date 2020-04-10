@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Alexa.NET.Request;
-using Alexa.NET.Request.Type;
-using Alexa.NET.Response;
 using Amazon.Lambda.Core;
 
 namespace SimpleVoice
 {
     public class VoiceHandler
     {
-
         private Dictionary<string, RequestHandler> _handlers;
         
         public VoiceHandler()
@@ -42,37 +38,15 @@ namespace SimpleVoice
         [LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
         public SkillResponse LambdaHandler(SkillRequest input, ILambdaContext context)
         {
-            SkillResponse response = new SkillResponse()
-            {
-                Version = "1.0",
-                SessionAttributes = new Dictionary<string, object>()
-                {
-                    {"Launched", true}
-                }
-            };
-            ResponseBody responseBody = new ResponseBody();
-            response.Response = responseBody;
-            responseBody.ShouldEndSession = false;
-
-            Type requestType = input.GetRequestType();
+            SkillResponse response = new SkillResponse();
+            
             string intentName;
             RequestData data = new RequestData();
             
-            if (requestType == typeof(LaunchRequest))
-            {
-                intentName = RequestHandler.LaunchRequest;
-            }
-            else if (requestType == typeof(IntentRequest))
-            {
-                IntentRequest request = (IntentRequest) input.Request;
-                intentName = request.Intent.Name;
-                // data["Test"] = request.Intent.Slots["Test"].Value;
-            }
-            else
-            {
-                intentName = RequestHandler.FallbackIntent;
-            }
-
+            IntentRequest request = (IntentRequest) input.Request;
+            intentName = request.Intent.Name;
+            // data["Test"] = request.Intent.Slots["Test"].Value;
+            
             RequestHandler requestHandler = GetHandler(intentName);
 
             if (requestHandler != null)

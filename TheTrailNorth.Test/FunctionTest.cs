@@ -1,8 +1,5 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Alexa.NET.Request;
-using Alexa.NET.Request.Type;
-using Alexa.NET.Response;
 using Xunit;
 using Amazon.Lambda.TestUtilities;
 using SimpleVoice;

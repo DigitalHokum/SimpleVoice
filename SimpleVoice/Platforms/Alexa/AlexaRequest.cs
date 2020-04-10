@@ -6,15 +6,25 @@ namespace SimpleVoice.Platforms.Alexa
     public class AlexaRequest : RequestAbstract
     {
         [JsonProperty("version")]
-        public readonly string Version;
+        public string Version;
         
         [JsonProperty("session")]
-        public readonly Data.Request.Session Session;
+        public Data.Request.Session Session;
         
         [JsonProperty("context")]
-        public readonly Data.Request.Context Context;
+        public Data.Request.Context Context;
         
         [JsonProperty("request")]
-        public readonly Data.Request.Request Request;
+        public Data.Request.Request Request;
+
+        public override ResponseAbstract BuildResponseObject()
+        {
+            return new AlexaResponse();
+        }
+
+        public override string GetIntentName()
+        {
+            return Request.Intent.Name;
+        }
     }
 }

@@ -1,11 +1,11 @@
 using System;
-using System.Collections.Generic;
+using SimpleVoice.Abstract;
 
 namespace SimpleVoice.Handlers
 {
     public interface IRequestHandler
     {
-        RequestHandlerResponse Handle(RequestData data);
+        ResponseAbstract Handle(RequestAbstract request);
     }
 
     [AttributeUsage(AttributeTargets.Class)]
@@ -32,25 +32,10 @@ namespace SimpleVoice.Handlers
             _type = type;
         }
 
-        public RequestHandlerResponse Resolve(RequestData data)
+        public ResponseAbstract Resolve(RequestAbstract request)
         {
              IRequestHandler obj = (IRequestHandler) Activator.CreateInstance(_type);
-             return obj.Handle(data);
-        }
-    }
-
-    public class RequestData : Dictionary<string, string>
-    {}
-
-    public class RequestHandlerResponse
-    {
-        public readonly string Speech;
-        public readonly string Reprompt;
-
-        public RequestHandlerResponse(string speech, string reprompt)
-        {
-            Speech = speech;
-            Reprompt = reprompt;
+             return obj.Handle(request);
         }
     }
 }

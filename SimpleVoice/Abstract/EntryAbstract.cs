@@ -30,7 +30,7 @@ namespace SimpleVoice.Abstract
             }
         }
 
-        private RequestHandler GetHandler(string name)
+        protected RequestHandler GetHandler(string name)
         {
             return _handlers.ContainsKey(name) ? _handlers[name] : null;
         }

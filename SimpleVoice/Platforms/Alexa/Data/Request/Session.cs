@@ -5,14 +5,14 @@ namespace SimpleVoice.Platforms.Alexa.Data.Request
 {
     public class Session
     {
-        [JsonProperty("new")] public readonly bool New;
+        [JsonProperty("new")] public bool New;
 
-        [JsonProperty("sessionId")] public readonly string SessionId;
+        [JsonProperty("sessionId")] public string SessionId;
 
-        [JsonProperty("attributes")] public readonly Dictionary<string, object> Attributes;
+        [JsonProperty("attributes")] public Dictionary<string, object> Attributes;
 
-        [JsonProperty("application")] public readonly Application Application;
+        [JsonProperty("application")] public Application Application;
 
-        [JsonProperty("user")] public readonly User User;
+        [JsonProperty("user")] public User User;
     }
 }

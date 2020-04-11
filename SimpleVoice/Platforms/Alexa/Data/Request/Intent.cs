@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace SimpleVoice.Platforms.Alexa.Data.Request
@@ -6,5 +7,6 @@ namespace SimpleVoice.Platforms.Alexa.Data.Request
     {
         [JsonProperty("name")] public string Name;
         [JsonProperty("confirmationStatus")] public string ConfirmationStatus;
+        [JsonProperty("slots")] public Dictionary<string, Slot> Slots;
     }
 }

@@ -19,5 +19,18 @@ namespace SimpleVoice.Test
             Assert.Equal("TestIntent Speech", response.Speech);
             Assert.Equal("TestIntent Reprompt", response.Reprompt);
         }
+        
+        [Fact]
+        public async Task VoiceHandlerRelay()
+        {
+            string speechTextToRelay = "Relay this!";
+            AlexaRequest request = MockData.AlexaRequest("RelayIntent");
+            
+            Lambda lambda = new Lambda();
+            AlexaResponse response = (AlexaResponse) lambda.Handle(request, new TestLambdaContext());
+
+            Assert.Equal("TestIntent Speech", response.Speech);
+            Assert.Equal("TestIntent Reprompt", response.Reprompt);
+        }
     }
 }

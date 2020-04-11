@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace SimpleVoice.Abstract
@@ -8,5 +9,7 @@ namespace SimpleVoice.Abstract
         public abstract ResponseAbstract BuildResponseObject();
 
         public abstract string GetIntentName();
+
+        public abstract Dictionary<string, string> GetData();
     }
 }

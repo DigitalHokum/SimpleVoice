@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using SimpleVoice.Abstract;
 
@@ -25,6 +26,11 @@ namespace SimpleVoice.Platforms.Alexa
         public override string GetIntentName()
         {
             return Request.Intent.Name;
+        }
+
+        public override Dictionary<string, string> GetData()
+        {
+            
         }
     }
 }

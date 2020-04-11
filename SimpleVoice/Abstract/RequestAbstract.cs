@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using Newtonsoft.Json;
+using SimpleVoice.Handlers;
 
 namespace SimpleVoice.Abstract
 {
@@ -10,6 +10,6 @@ namespace SimpleVoice.Abstract
 
         public abstract string GetIntentName();
 
-        public abstract Dictionary<string, string> GetData();
+        public abstract RequestData GetData();
     }
 }

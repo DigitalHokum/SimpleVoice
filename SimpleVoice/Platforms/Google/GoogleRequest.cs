@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using SimpleVoice.Abstract;
+using SimpleVoice.Handlers;
 
 namespace SimpleVoice.Platforms.Google
 {
@@ -12,6 +14,11 @@ namespace SimpleVoice.Platforms.Google
         public override string GetIntentName()
         {
             throw new System.NotImplementedException();
+        }
+
+        public override RequestData GetData()
+        {
+            return new RequestData();
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using SimpleVoice.Abstract;
+using SimpleVoice.Handlers;
 
 namespace SimpleVoice.Platforms.Alexa
 {
@@ -28,9 +29,19 @@ namespace SimpleVoice.Platforms.Alexa
             return Request.Intent.Name;
         }
 
-        public override Dictionary<string, string> GetData()
+        public override RequestData GetData()
         {
+            RequestData data = new RequestData();
+
+            if (!Request.HasIntent() || !Request.Intent.HasSlotData())
+                return data;
             
+            foreach (KeyValuePair<string, Data.Request.Slot> pair in Request.Intent.Slots)
+            {
+                data[pair.Value.Name] = pair.Value.Value;
+            }
+            
+            return data;
         }
     }
 }

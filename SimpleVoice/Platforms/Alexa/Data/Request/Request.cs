@@ -9,5 +9,10 @@ namespace SimpleVoice.Platforms.Alexa.Data.Request
         [JsonProperty("timestamp")] public string Timestamp;
         [JsonProperty("locale")] public string Locale;
         [JsonProperty("intent")] public Intent Intent;
+
+        public bool HasIntent()
+        {
+            return Intent != null;
+        }
     }
 }

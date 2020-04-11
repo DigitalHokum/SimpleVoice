@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using SimpleVoice.Platforms.Alexa;
 using SimpleVoice.Platforms.Alexa.Data.Request;
 
@@ -23,7 +24,8 @@ namespace SimpleVoice.Test
                 {
                     Intent = new Intent()
                     {
-                        Name = intent
+                        Name = intent,
+                        Slots = new Dictionary<string, Slot>()
                     }
                 }
             };

@@ -10,7 +10,7 @@ namespace SimpleVoice.Entry
         public ResponseAbstract Handle(RequestAbstract request, ILambdaContext context)
         {
             string intentName = request.GetIntentName();
-            RequestHandler handler = GetHandler(intentName);
+            RegisterHandler handler = GetHandler(intentName);
             return handler.Resolve(request);
         }
     }

@@ -3,10 +3,10 @@ using SimpleVoice.Handlers;
 
 namespace SimpleVoice.Test.Handlers
 {
-    [RequestHandler("TestIntent")]
-    public class TestHandler : IRequestHandler
+    [RegisterHandler("TestIntent")]
+    public class TestHandler : RequestHandler
     {
-        public ResponseAbstract Handle(RequestAbstract request)
+        public override ResponseAbstract Handle(RequestAbstract request)
         {
             ResponseAbstract response = request.BuildResponseObject();
             response.Speech = "TestIntent Speech";

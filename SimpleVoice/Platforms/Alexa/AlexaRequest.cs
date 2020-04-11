@@ -26,7 +26,16 @@ namespace SimpleVoice.Platforms.Alexa
 
         public override string GetIntentName()
         {
-            return Request.Intent.Name;
+            if (Request.Type == "IntentRequest")
+            {
+                return Request.Intent.Name;    
+            }
+            else if (Request.Type == "LaunchRequest")
+            {
+                return "LaunchRequest";
+            }
+
+            return "FallbackIntent";
         }
 
         public override RequestData GetData()

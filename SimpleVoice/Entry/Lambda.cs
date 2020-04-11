@@ -1,6 +1,7 @@
 using Amazon.Lambda.Core;
 using SimpleVoice.Abstract;
 using SimpleVoice.Handlers;
+using SimpleVoice.Platforms.Alexa;
 
 namespace SimpleVoice.Entry
 {
@@ -11,7 +12,9 @@ namespace SimpleVoice.Entry
         {
             string intentName = request.GetIntentName();
             RegisterHandler handler = GetHandler(intentName);
-            return handler.Resolve(request);
+            ResponseAbstract response = handler.Resolve(request);
+            response.PrepareData();
+            return response;
         }
     }
 }

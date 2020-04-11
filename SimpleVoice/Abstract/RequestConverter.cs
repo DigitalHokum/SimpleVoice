@@ -9,15 +9,13 @@ namespace SimpleVoice.Abstract
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
         }
 
-        public override object ReadJson(JsonReader reader, System.Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             // Load JObject from stream
             JObject jObject = JObject.Load(reader);
 
-            
             var target = new AlexaRequest();
 
             // Populate the object properties
@@ -28,7 +26,7 @@ namespace SimpleVoice.Abstract
 
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(RequestAbstract);
+            return true;
         }
     }
 }

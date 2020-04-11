@@ -22,6 +22,7 @@ namespace SimpleVoice.Test
                 },
                 Request = new Request()
                 {
+                    Type = "IntentRequest",
                     Intent = new Intent()
                     {
                         Name = intent,

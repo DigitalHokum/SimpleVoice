@@ -4,5 +4,7 @@ namespace SimpleVoice.Abstract
     {
         public string Reprompt;
         public string Speech;
+
+        public abstract void PrepareData();
     }
 }

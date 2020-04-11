@@ -11,6 +11,7 @@ namespace SimpleVoice.Test.Handlers
             ResponseAbstract response = request.BuildResponseObject();
             response.Speech = "TestIntent Speech";
             response.Reprompt = "TestIntent Reprompt";
+            response.PrepareData();
             return response;
         }
     }

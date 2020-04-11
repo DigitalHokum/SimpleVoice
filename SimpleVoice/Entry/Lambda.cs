@@ -3,7 +3,6 @@ using Newtonsoft.Json.Linq;
 using SimpleVoice.Abstract;
 using SimpleVoice.Handlers;
 using SimpleVoice.Platforms.Alexa;
-using SimpleVoice.Platforms.Alexa.Data.Request;
 
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
 namespace SimpleVoice.Entry
@@ -15,15 +14,20 @@ namespace SimpleVoice.Entry
         {
             AlexaRequest request = o.ToObject<AlexaRequest>();
             ILambdaLogger logger = context.Logger;
-            logger.Log($"Request Received by handler, Version: {o["version"]}");
-            return HandleRequest(request);
+            logger.LogLine($"Request Received by handler, Version: {o["version"]}, IntentName: {request.GetIntentName()}");
+            return HandleRequest(request, context);
         }
         
-        public ResponseAbstract HandleRequest(RequestAbstract request)
+        public ResponseAbstract HandleRequest(AlexaRequest request, ILambdaContext context = null)
         {
-            string intentName = request?.GetIntentName();
+            ILambdaLogger logger = context?.Logger;
+
+            string intentName = request.GetIntentName();
+            logger?.LogLine($"Found Intent: {intentName}");
             RegisterHandler handler = GetHandler(intentName);
+            logger?.LogLine($"Handler: {handler.GetType()}");
             ResponseAbstract response = handler.Resolve(request);
+            logger?.LogLine($"Response: {response.Speech}");
             response.PrepareData();
             return response;
         }

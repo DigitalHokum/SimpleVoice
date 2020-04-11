@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Amazon.Lambda.TestUtilities;
 using SimpleVoice.Entry;
 using Xunit;
 using SimpleVoice.Platforms.Alexa;
@@ -14,7 +13,7 @@ namespace SimpleVoice.Test
         {
             AlexaRequest request = MockData.AlexaRequest("TestIntent");
             Lambda lambda = new Lambda();
-            AlexaResponse response = (AlexaResponse) lambda.Handle(request, new TestLambdaContext());
+            AlexaResponse response = (AlexaResponse) lambda.HandleRequest(request);
             
             
             Assert.Equal("TestIntent Speech", response.Speech);
@@ -39,7 +38,7 @@ namespace SimpleVoice.Test
             });
 
             Lambda lambda = new Lambda();
-            AlexaResponse response = (AlexaResponse) lambda.Handle(request, new TestLambdaContext());
+            AlexaResponse response = (AlexaResponse) lambda.HandleRequest(request);
 
             Assert.Equal(speechTextToRelay, response.Speech);
             Assert.Equal(repromptTextToRelay, response.Reprompt);

@@ -9,7 +9,7 @@ namespace TheTrailNorth
         public override ResponseAbstract Handle(RequestAbstract request)
         {
             ResponseAbstract response = request.BuildResponseObject();
-            response.Speech = "Welcome to The Trail North.";
+            response.Speech = "<speak>Welcome to The Trail North.</speak>";
             response.Reprompt = "Say something that you would like repeated.";
             
             return response;
@@ -32,6 +32,23 @@ namespace TheTrailNorth
 
             response.Speech = Speech;
             response.Reprompt = "Say something that you would like repeated.";
+            return response;
+        }
+    }
+    
+    [RegisterHandler("FallbackIntent",
+        new[] {
+            "Do something with the {test}",
+            "Test the test with the {test}"
+        })]
+    public class FallbackHandler : RequestHandler
+    {
+        public override ResponseAbstract Handle(RequestAbstract request)
+        {
+            ResponseAbstract response = request.BuildResponseObject();
+
+            response.Speech = "This is the fallback handler";
+            response.Reprompt = "Intent was not found, so this was invoked.";
             return response;
         }
     }

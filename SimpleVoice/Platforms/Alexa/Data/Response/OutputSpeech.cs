@@ -7,7 +7,10 @@ namespace SimpleVoice.Platforms.Alexa.Data.Response
         [JsonProperty("type")]
         public string Type;
         
-        [JsonProperty("ssml")]
+        [JsonProperty("ssml", NullValueHandling = NullValueHandling.Ignore)]
         public string SSML;
+
+        [JsonProperty("text", NullValueHandling = NullValueHandling.Ignore)]
+        public string Text;
     }
 }

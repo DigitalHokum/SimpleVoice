@@ -14,17 +14,23 @@ namespace SimpleVoice.Entry
         {
             AlexaRequest request = o.ToObject<AlexaRequest>();
             ILambdaLogger logger = context.Logger;
+            logger.LogLine(o.ToString());
             return HandleRequest(request, context);
         }
         
         public ResponseAbstract HandleRequest(AlexaRequest request, ILambdaContext context = null)
         {
-            ILambdaLogger logger = context?.Logger;
-
+            ILambdaLogger logger = context.Logger;
+            
             string intentName = request.GetIntentName();
+            
+            logger.LogLine($"Intent: {intentName}");
+            
             RegisterHandler handler = GetHandler(intentName);
-            ResponseAbstract response = handler.Resolve(request);
+            AlexaResponse response = (AlexaResponse) handler.Resolve(request);
             response.PrepareData();
+            logger.LogLine($"Response version {response.Version}");
+            logger.LogLine($"Response speech {response.Response.OutputSpeech.SSML}");
             return response;
         }
     }

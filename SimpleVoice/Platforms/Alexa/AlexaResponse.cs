@@ -24,33 +24,38 @@ namespace SimpleVoice.Platforms.Alexa
  */
     public class AlexaResponse : ResponseAbstract
     {
-        [JsonProperty("body")]
-        public Body Body;
+        [JsonProperty("version")]
+        public string Version = "1.0";
+        
+        [JsonProperty("response")]
+        public Response Response;
+        
+        [JsonProperty("sessionAttributes")]
+        public Dictionary<string, object> SessionAttributes = new Dictionary<string, object>();
 
         public override void PrepareData()
         {
-            Body = new Body()
+
+            Response = new Response()
             {
-                Response = new Response()
+                OutputSpeech = new OutputSpeech()
+                {
+                    Type = "SSML",
+                    SSML = Speech
+                },
+                Reprompt = new Reprompt()
                 {
                     OutputSpeech = new OutputSpeech()
                     {
-                        Type = "SSML",
-                        SSML = Speech
-                    },
-                    Reprompt = new Reprompt()
-                    {
-                        OutputSpeech = new OutputSpeech()
-                        {
-                            Type = "SSML",
-                            SSML = Reprompt
-                        }
+                        Type = "PlainText",
+                        Text = Reprompt
                     }
-                },
-                SessionAttributes = new Dictionary<string, object>()
-                {
-                    {"launched", true}
                 }
+            };
+
+            SessionAttributes = new Dictionary<string, object>()
+            {
+                {"launched", true}
             };
         }
     }

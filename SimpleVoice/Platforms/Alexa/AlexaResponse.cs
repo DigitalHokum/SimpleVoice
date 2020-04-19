@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using SimpleVoice.Abstract;
 using SimpleVoice.Platforms.Alexa.Data.Response;
@@ -37,11 +38,18 @@ namespace SimpleVoice.Platforms.Alexa
                         Type = "SSML",
                         SSML = Speech
                     },
-                    Reprompt = new OutputSpeech()
+                    Reprompt = new Reprompt()
                     {
-                        Type = "SSML",
-                        SSML = Reprompt
+                        OutputSpeech = new OutputSpeech()
+                        {
+                            Type = "SSML",
+                            SSML = Reprompt
+                        }
                     }
+                },
+                SessionAttributes = new Dictionary<string, object>()
+                {
+                    {"launched", true}
                 }
             };
         }

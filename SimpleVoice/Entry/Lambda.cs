@@ -14,7 +14,6 @@ namespace SimpleVoice.Entry
         {
             AlexaRequest request = o.ToObject<AlexaRequest>();
             ILambdaLogger logger = context.Logger;
-            logger.LogLine($"Request Received by handler, Version: {o["version"]}, IntentName: {request.GetIntentName()}");
             return HandleRequest(request, context);
         }
         
@@ -23,11 +22,8 @@ namespace SimpleVoice.Entry
             ILambdaLogger logger = context?.Logger;
 
             string intentName = request.GetIntentName();
-            logger?.LogLine($"Found Intent: {intentName}");
             RegisterHandler handler = GetHandler(intentName);
-            logger?.LogLine($"Handler: {handler.GetType()}");
             ResponseAbstract response = handler.Resolve(request);
-            logger?.LogLine($"Response: {response.Speech}");
             response.PrepareData();
             return response;
         }

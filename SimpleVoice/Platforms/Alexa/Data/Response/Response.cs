@@ -9,7 +9,7 @@ namespace SimpleVoice.Platforms.Alexa.Data.Response
         public OutputSpeech OutputSpeech;
         
         [JsonProperty("reprompt")]
-        public OutputSpeech Reprompt;
+        public Reprompt Reprompt;
         
         [JsonProperty("shouldEndSession")]
         public bool ShouldEndSession = false;
@@ -17,7 +17,7 @@ namespace SimpleVoice.Platforms.Alexa.Data.Response
         [JsonProperty("type")]
         public string Type = "_DEFAULT_RESPONSE";
         
-        [JsonProperty("directives")]
-        public List<string> Directives = new List<string>();
+        [JsonProperty("directives", NullValueHandling = NullValueHandling.Ignore)]
+        public List<string> Directives;
     }
 }

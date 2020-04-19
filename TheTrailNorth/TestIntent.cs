@@ -30,13 +30,13 @@ namespace TheTrailNorth
         {
             ResponseAbstract response = request.BuildResponseObject();
 
-            response.Speech = Speech;
+            response.Speech = $"<speak>{Speech}</speak>";
             response.Reprompt = "Say something that you would like repeated.";
             return response;
         }
     }
     
-    [RegisterHandler("FallbackIntent",
+    [RegisterHandler("AMAZON.FallbackIntent",
         new[] {
             "Do something with the {test}",
             "Test the test with the {test}"
@@ -47,7 +47,7 @@ namespace TheTrailNorth
         {
             ResponseAbstract response = request.BuildResponseObject();
 
-            response.Speech = "This is the fallback handler";
+            response.Speech = "<speak>This is the fallback handler</speak>";
             response.Reprompt = "Intent was not found, so this was invoked.";
             return response;
         }

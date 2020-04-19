@@ -35,7 +35,7 @@ namespace SimpleVoice.Platforms.Alexa
                 return "LaunchRequest";
             }
 
-            return "FallbackIntent";
+            return "AMAZON.FallbackIntent";
         }
 
         public override RequestData GetData()

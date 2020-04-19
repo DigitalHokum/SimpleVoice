@@ -18,8 +18,8 @@ namespace TheTrailNorth
     
     [RegisterHandler("RelayIntent",
         new[] {
-            "Do something with the {test}",
-            "Test the test with the {test}"
+            "Do something with the {speech}",
+            "Test the test with the {speech}"
         })]
     public class RelayHandler : RequestHandler
     {

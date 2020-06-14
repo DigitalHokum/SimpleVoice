@@ -1,4 +1,6 @@
 using System.Threading.Tasks;
+using Amazon.Lambda.Core;
+using Amazon.Lambda.TestUtilities;
 using SimpleVoice.Entry;
 using Xunit;
 using SimpleVoice.Platforms.Alexa;
@@ -36,9 +38,9 @@ namespace SimpleVoice.Test
                 Name = "reprompt",
                 Value = repromptTextToRelay
             });
-
-            Lambda lambda = new Lambda();
-            AlexaResponse response = (AlexaResponse) lambda.HandleRequest(request);
+            
+            TestEntry lambda = new TestEntry();
+            AlexaResponse response = (AlexaResponse) lambda.HandleProxy(request);
 
             Assert.Equal(speechTextToRelay, response.Speech);
             Assert.Equal(repromptTextToRelay, response.Reprompt);

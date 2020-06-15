@@ -8,10 +8,6 @@ ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
 EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheTrailNorth", "TheTrailNorth\TheTrailNorth.csproj", "{378EB0DE-D962-40E8-BABA-B44F1139C337}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheTrailNorth.Tests", "TheTrailNorth.Test\TheTrailNorth.Tests.csproj", "{571C9E8C-590A-44EB-B53E-51AA9EE5A8F3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleVoice", "SimpleVoice\SimpleVoice.csproj", "{5A2A1A5F-AE1C-4FDD-8930-F84552D45C90}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleVoice.Test", "SimpleVoice.Test\SimpleVoice.Test.csproj", "{E6CC6BA2-4916-4882-9723-C2D3A9DBDC70}"
@@ -22,14 +18,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{378EB0DE-D962-40E8-BABA-B44F1139C337}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{378EB0DE-D962-40E8-BABA-B44F1139C337}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{378EB0DE-D962-40E8-BABA-B44F1139C337}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{378EB0DE-D962-40E8-BABA-B44F1139C337}.Release|Any CPU.Build.0 = Release|Any CPU
-		{571C9E8C-590A-44EB-B53E-51AA9EE5A8F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{571C9E8C-590A-44EB-B53E-51AA9EE5A8F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{571C9E8C-590A-44EB-B53E-51AA9EE5A8F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{571C9E8C-590A-44EB-B53E-51AA9EE5A8F3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5A2A1A5F-AE1C-4FDD-8930-F84552D45C90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5A2A1A5F-AE1C-4FDD-8930-F84552D45C90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A2A1A5F-AE1C-4FDD-8930-F84552D45C90}.Release|Any CPU.ActiveCfg = Release|Any CPU

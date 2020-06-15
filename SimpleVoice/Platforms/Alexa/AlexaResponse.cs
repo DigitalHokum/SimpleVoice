@@ -41,7 +41,7 @@ namespace SimpleVoice.Platforms.Alexa
                 OutputSpeech = new OutputSpeech()
                 {
                     Type = "SSML",
-                    SSML = $"<speak>{Speech}</speak>"
+                    SSML = $"<speak>{Speech}{Reprompt}</speak>"
                 },
                 Reprompt = new Reprompt()
                 {

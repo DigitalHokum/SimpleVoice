@@ -13,13 +13,11 @@ namespace SimpleVoice.Entry
         public ResponseAbstract Handle(JObject o, ILambdaContext context)
         {
             AlexaRequest request = o.ToObject<AlexaRequest>();
-            Logger.Log("This is only a test.", context);
             return HandleRequest(request, context);
         }
         
         public ResponseAbstract HandleRequest(AlexaRequest request, ILambdaContext context = null)
         {
-            Logger.Log("This is only a test.", context);
             string intentName = request.GetIntentName();
             RegisterHandler handler = GetHandler(intentName);
             AlexaResponse response = (AlexaResponse) handler.Resolve(request);

@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Amazon.Lambda.Core;
 using Newtonsoft.Json.Linq;
 using SimpleVoice.Abstract;
@@ -10,17 +11,17 @@ namespace SimpleVoice.Entry
 {
     public class Lambda : EntryAbstract
     {
-        public ResponseAbstract Handle(JObject o, ILambdaContext context)
+        public async Task<ResponseAbstract> Handle(JObject o, ILambdaContext context)
         {
             AlexaRequest request = o.ToObject<AlexaRequest>();
-            return HandleRequest(request, context);
+            return await HandleRequest(request, context);
         }
         
-        public ResponseAbstract HandleRequest(AlexaRequest request, ILambdaContext context = null)
+        public async Task<ResponseAbstract> HandleRequest(AlexaRequest request, ILambdaContext context = null)
         {
             string intentName = request.GetIntentName();
             RegisterHandler handler = GetHandler(intentName);
-            AlexaResponse response = (AlexaResponse) handler.Resolve(request);
+            AlexaResponse response = (AlexaResponse) await handler.Resolve(request);
             response.PrepareData();
             return response;
         }

@@ -1,12 +1,13 @@
 using System;
 using System.Reflection;
+using System.Threading.Tasks;
 using SimpleVoice.Abstract;
 
 namespace SimpleVoice.Handlers
 {
     public abstract class RequestHandler
     {
-        public abstract ResponseAbstract Handle(RequestAbstract request);
+        public abstract Task<ResponseAbstract> Handle(RequestAbstract request);
         
         public void SetParam(string key, string value)
         {

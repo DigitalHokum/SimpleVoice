@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 using SimpleVoice.Abstract;
 
 namespace SimpleVoice.Handlers
@@ -42,7 +43,7 @@ namespace SimpleVoice.Handlers
             Params.Add(field, handlerParam);
         }
 
-        public ResponseAbstract Resolve(RequestAbstract request)
+        public Task<ResponseAbstract> Resolve(RequestAbstract request)
         {
              RequestHandler obj = (RequestHandler) Activator.CreateInstance(_type);
              RequestData data = request.GetData();

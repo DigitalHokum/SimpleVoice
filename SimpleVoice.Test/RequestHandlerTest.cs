@@ -15,7 +15,7 @@ namespace SimpleVoice.Test
         {
             AlexaRequest request = MockData.AlexaRequest("TestIntent");
             Lambda lambda = new Lambda();
-            AlexaResponse response = (AlexaResponse) lambda.HandleRequest(request);
+            AlexaResponse response = (AlexaResponse) await lambda.HandleRequest(request);
             
             
             Assert.Equal("TestIntent Speech", response.Speech);
@@ -40,7 +40,7 @@ namespace SimpleVoice.Test
             });
             
             TestEntry lambda = new TestEntry();
-            AlexaResponse response = (AlexaResponse) lambda.HandleProxy(request);
+            AlexaResponse response = (AlexaResponse) await lambda.HandleProxy(request);
 
             Assert.Equal(speechTextToRelay, response.Speech);
             Assert.Equal(repromptTextToRelay, response.Reprompt);

@@ -38,6 +38,11 @@ namespace SimpleVoice.Platforms.Alexa
             return "AMAZON.FallbackIntent";
         }
 
+        public override string GetClientId()
+        {
+            return Session.User.UserID;
+        }
+
         public override RequestData GetData()
         {
             RequestData data = new RequestData();

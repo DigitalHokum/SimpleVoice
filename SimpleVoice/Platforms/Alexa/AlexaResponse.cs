@@ -35,13 +35,12 @@ namespace SimpleVoice.Platforms.Alexa
 
         public override void PrepareData()
         {
-
             Response = new Response()
             {
                 OutputSpeech = new OutputSpeech()
                 {
                     Type = "SSML",
-                    SSML = $"<speak>{Speech}{Reprompt}</speak>"
+                    SSML = $"<speak>{Speech} {Reprompt}</speak>"
                 },
                 Reprompt = new Reprompt()
                 {

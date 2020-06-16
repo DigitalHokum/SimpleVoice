@@ -16,6 +16,11 @@ namespace SimpleVoice.Platforms.Google
             throw new System.NotImplementedException();
         }
 
+        public override string GetClientId()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public override RequestData GetData()
         {
             return new RequestData();

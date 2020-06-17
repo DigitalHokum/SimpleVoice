@@ -3,7 +3,6 @@ using Amazon.Lambda.Core;
 using Newtonsoft.Json.Linq;
 using SimpleVoice.Abstract;
 using SimpleVoice.Handlers;
-using SimpleVoice.Helpers;
 using SimpleVoice.Platforms.Alexa;
 
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]

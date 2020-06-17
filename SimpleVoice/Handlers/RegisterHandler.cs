@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using SimpleVoice.Abstract;
@@ -54,41 +55,6 @@ namespace SimpleVoice.Handlers
              }
              
              return obj.Handle(request);
-        }
-
-        public static Dictionary<string, RegisterHandler> Discover()
-        {
-            Dictionary<string, RegisterHandler> handlers = new Dictionary<string, RegisterHandler>();
-            
-            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies()) 
-            {
-                foreach (Type type in assembly.GetTypes())
-                {
-                    RegisterHandler[] _handlers = (RegisterHandler[]) type.GetCustomAttributes(typeof(RegisterHandler), false);
-                    if (_handlers.Length > 0)
-                    {
-                        foreach (RegisterHandler handler in _handlers)
-                        {
-                            handler.Register(type);
-                            handlers.Add(handler.Name, handler);
-                            
-                            foreach (FieldInfo field in type.GetFields())
-                            {
-                                HandlerParam[] handlerParams = (HandlerParam[]) field.GetCustomAttributes(typeof(HandlerParam));
-                                if (handlerParams.Length > 0)
-                                {
-                                    foreach (HandlerParam param in handlerParams)
-                                    {
-                                        handler.RegisterParam(field, param);   
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            return handlers;
         }
     }
 }

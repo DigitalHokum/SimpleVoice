@@ -7,6 +7,7 @@ namespace SimpleVoice.Handlers
     {
         public readonly string ValueType;
         public readonly string Name;
+        
         public HandlerParam(string valueType)
         {
             ValueType = valueType;

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SimpleVoice.Values
+namespace SimpleVoice.ValueTypes
 {
     public abstract class ValueType
     {

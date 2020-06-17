@@ -1,6 +1,6 @@
 using System;
 
-namespace SimpleVoice.Values
+namespace SimpleVoice.ValueTypes
 {
     public class RegisterValueType : Attribute
     {

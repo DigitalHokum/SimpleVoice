@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using SimpleVoice.Helpers;
 
-namespace SimpleVoice.Values
+namespace SimpleVoice.ValueTypes
 {
     public static class ValueTypeManager
     {

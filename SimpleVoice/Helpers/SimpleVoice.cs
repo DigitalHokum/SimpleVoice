@@ -1,5 +1,5 @@
 using SimpleVoice.Handlers;
-using SimpleVoice.Values;
+using SimpleVoice.ValueTypes;
 
 namespace SimpleVoice.Helpers
 {

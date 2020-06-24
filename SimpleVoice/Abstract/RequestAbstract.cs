@@ -13,5 +13,7 @@ namespace SimpleVoice.Abstract
         public abstract string GetClientId();
 
         public abstract RequestData GetData();
+
+        public abstract string GetClientLocale();
     }
 }

@@ -25,5 +25,10 @@ namespace SimpleVoice.Platforms.Google
         {
             return new RequestData();
         }
+
+        public override string GetClientLocale()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

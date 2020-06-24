@@ -57,5 +57,10 @@ namespace SimpleVoice.Platforms.Alexa
             
             return data;
         }
+
+        public override string GetClientLocale()
+        {
+            return Request.Locale;
+        }
     }
 }

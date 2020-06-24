@@ -8,6 +8,8 @@ namespace SimpleVoice.Handlers
     public abstract class RequestHandler
     {
         public abstract Task<ResponseAbstract> Handle(RequestAbstract request);
+        public virtual void Setup(RequestAbstract request)
+        {}
         
         public void SetParam(string key, string value)
         {

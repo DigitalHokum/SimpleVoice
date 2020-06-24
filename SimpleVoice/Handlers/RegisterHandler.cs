@@ -54,6 +54,7 @@ namespace SimpleVoice.Handlers
                  pair.Key.SetValue(obj, data.Get<string>(pair.Value.Name));
              }
              
+             obj.Setup(request);
              return obj.Handle(request);
         }
     }

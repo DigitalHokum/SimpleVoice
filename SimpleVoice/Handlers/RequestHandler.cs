@@ -9,9 +9,9 @@ namespace SimpleVoice.Handlers
     {
         protected RequestAbstract Request;
         public abstract Task<ResponseAbstract> Handle();
-        public virtual void Setup()
-        {}
-        
+
+        public abstract Task Setup();
+
         public void SetParam(string key, string value)
         {
             Type t = GetType();
@@ -26,8 +26,7 @@ namespace SimpleVoice.Handlers
 
         public void SetRequest(RequestAbstract request)
         {
-            if (Request == null)
-                Request = request;
+            Request = request;
         }
     }
 }

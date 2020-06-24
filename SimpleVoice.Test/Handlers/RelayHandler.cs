@@ -9,7 +9,7 @@ namespace SimpleVoice.Test.Handlers
             "Do something with the {test}",
             "Test the test with the {test}"
         })]
-    public class RelayHandler : RequestHandler
+    public class RelayHandler : SimpleRequestHandler
     {
         [HandlerParam(Slots.TestSlot, "speech")]
         public string Speech;

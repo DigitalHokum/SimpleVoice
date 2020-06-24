@@ -1,6 +1,4 @@
 using System.Threading.Tasks;
-using Amazon.Lambda.Core;
-using Amazon.Lambda.TestUtilities;
 using SimpleVoice.Entry;
 using Xunit;
 using SimpleVoice.Platforms.Alexa;
@@ -11,13 +9,22 @@ namespace SimpleVoice.Test
     public class RequestHandlerTest
     {
         [Fact]
+        public async Task VoiceHandlerSetupTest()
+        {
+            AlexaRequest request = MockData.AlexaRequest("SetupIntent");
+            Lambda lambda = new Lambda();
+            AlexaResponse response = (AlexaResponse) await lambda.HandleRequest(request);
+            
+            Assert.Equal("Setup Complete", response.Speech);
+        }
+
+        [Fact]
         public async Task VoiceHandlerRoutingAlexa()
         {
             AlexaRequest request = MockData.AlexaRequest("TestIntent");
             Lambda lambda = new Lambda();
             AlexaResponse response = (AlexaResponse) await lambda.HandleRequest(request);
-            
-            
+
             Assert.Equal("TestIntent Speech", response.Speech);
             Assert.Equal("TestIntent Reprompt", response.Reprompt);
         }

@@ -44,19 +44,20 @@ namespace SimpleVoice.Handlers
             Params.Add(field, handlerParam);
         }
 
-        public Task<ResponseAbstract> Resolve(RequestAbstract request)
+        public async Task<ResponseAbstract> Resolve(RequestAbstract request)
         {
              RequestHandler obj = (RequestHandler) Activator.CreateInstance(_type);
              RequestData data = request.GetData();
+             
+             obj.SetRequest(request);
 
              foreach (KeyValuePair<FieldInfo,HandlerParam> pair in Params)
              {
                  pair.Key.SetValue(obj, data.Get<string>(pair.Value.Name));
              }
-
-             obj.SetRequest(request);
-             obj.Setup();
-             return obj.Handle();
+             
+             await obj.Setup();
+             return await obj.Handle();
         }
     }
 }

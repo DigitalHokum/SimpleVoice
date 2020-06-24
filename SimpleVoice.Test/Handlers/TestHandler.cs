@@ -7,9 +7,9 @@ namespace SimpleVoice.Test.Handlers
     [RegisterHandler("TestIntent")]
     public class TestHandler : RequestHandler
     {
-        public override async Task<ResponseAbstract> Handle(RequestAbstract request)
+        public override async Task<ResponseAbstract> Handle()
         {
-            ResponseAbstract response = request.BuildResponseObject();
+            ResponseAbstract response = Request.BuildResponseObject();
             response.Speech = "TestIntent Speech";
             response.Reprompt = "TestIntent Reprompt";
             response.PrepareData();

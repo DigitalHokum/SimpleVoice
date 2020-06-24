@@ -17,9 +17,9 @@ namespace SimpleVoice.Test.Handlers
         [HandlerParam(Slots.TestSlot, "reprompt")]
         public string Reprompt;
         
-        public override async Task<ResponseAbstract> Handle(RequestAbstract request)
+        public override async Task<ResponseAbstract> Handle()
         {
-            ResponseAbstract response = request.BuildResponseObject();
+            ResponseAbstract response = Request.BuildResponseObject();
 
             response.Speech = Speech;
             response.Reprompt = Reprompt;

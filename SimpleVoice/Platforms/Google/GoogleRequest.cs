@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using SimpleVoice.Abstract;
 using SimpleVoice.Handlers;
 using SimpleVoice.Handlers.Abstract;
@@ -33,6 +32,11 @@ namespace SimpleVoice.Platforms.Google
         }
 
         public override PurchaseRequest BuildPurchaseRequest()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override ResponseAbstract BuildPurchaseResponseObject(string productId)
         {
             throw new System.NotImplementedException();
         }

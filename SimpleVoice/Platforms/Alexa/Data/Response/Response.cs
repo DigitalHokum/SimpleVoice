@@ -18,6 +18,6 @@ namespace SimpleVoice.Platforms.Alexa.Data.Response
         public string Type = "_DEFAULT_RESPONSE";
         
         [JsonProperty("directives", NullValueHandling = NullValueHandling.Ignore)]
-        public List<string> Directives;
+        public List<Directive> Directives;
     }
 }

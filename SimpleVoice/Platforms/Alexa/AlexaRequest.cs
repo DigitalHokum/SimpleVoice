@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using SimpleVoice.Abstract;
 using SimpleVoice.Handlers;
 using SimpleVoice.Handlers.Abstract;
+using SimpleVoice.Platforms.Alexa.Data.Response;
 
 namespace SimpleVoice.Platforms.Alexa
 {
@@ -25,16 +26,31 @@ namespace SimpleVoice.Platforms.Alexa
             return new AlexaResponse();
         }
 
+        public override ResponseAbstract BuildPurchaseResponseObject(string productId)
+        {
+            AlexaResponse response = (AlexaResponse) BuildResponseObject();
+            response.Response.Directives = new List<Directive>();
+            response.Response.Directives.Add(new Directive()
+            {
+                Payload = new DirectivePayload()
+                {
+                    InSkillProduct = new InSkillProductDirective()
+                    {
+                        ProductId = productId
+                    }
+                }
+            });
+            
+            return response;
+        }
+
         public override string GetIntentName()
         {
             if (Request.Type == "IntentRequest")
-            {
                 return Request.Intent.Name;    
-            }
-            else if (Request.Type == "LaunchRequest")
-            {
+            
+            if (Request.Type == "LaunchRequest")
                 return "LaunchRequest";
-            }
 
             return "AMAZON.FallbackIntent";
         }

@@ -17,5 +17,6 @@ namespace SimpleVoice.Abstract
 
         public abstract PurchaseRequest BuildPurchaseRequest();
         public abstract ResponseAbstract BuildPurchaseResponseObject(string productId, string speech);
+        public abstract ResponseAbstract BuildCancelResponseObject(string productId, string speech);
     }
 }

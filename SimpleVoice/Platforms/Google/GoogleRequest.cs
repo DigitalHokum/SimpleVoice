@@ -40,5 +40,10 @@ namespace SimpleVoice.Platforms.Google
         {
             throw new System.NotImplementedException();
         }
+
+        public override ResponseAbstract BuildCancelResponseObject(string productId, string speech)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

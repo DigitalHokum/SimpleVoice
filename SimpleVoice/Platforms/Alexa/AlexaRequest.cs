@@ -27,7 +27,7 @@ namespace SimpleVoice.Platforms.Alexa
             return new AlexaResponse();
         }
 
-        public override ResponseAbstract BuildPurchaseResponseObject(string productId, string speech)
+        protected ResponseAbstract BuildISPResponseObject(string productId, string speech, string action)
         {
             AlexaResponse response = (AlexaResponse) BuildResponseObject();
             response.Speech = speech;
@@ -39,7 +39,7 @@ namespace SimpleVoice.Platforms.Alexa
                 new Directive()
                 {
                     Type = "Connections.SendRequest",
-                    Name = "Buy",
+                    Name = action,
                     Token = Guid.NewGuid().ToString(),
                     Payload = new Dictionary<string, Dictionary<string, object>>()
                     {
@@ -53,6 +53,16 @@ namespace SimpleVoice.Platforms.Alexa
             };
 
             return response;
+        }
+
+        public override ResponseAbstract BuildPurchaseResponseObject(string productId, string speech)
+        {
+            return BuildISPResponseObject(productId, speech, "Buy");
+        }
+
+        public override ResponseAbstract BuildCancelResponseObject(string productId, string speech)
+        {
+            return BuildISPResponseObject(productId, speech, "Cancel");
         }
 
         public override string GetIntentName()

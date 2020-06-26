@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using SimpleVoice.Abstract;
 using SimpleVoice.Handlers;
+using SimpleVoice.Handlers.Abstract;
 
 namespace SimpleVoice.Platforms.Google
 {
@@ -27,6 +28,11 @@ namespace SimpleVoice.Platforms.Google
         }
 
         public override string GetClientLocale()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override PurchaseRequest BuildPurchaseRequest()
         {
             throw new System.NotImplementedException();
         }

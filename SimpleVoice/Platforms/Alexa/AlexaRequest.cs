@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using SimpleVoice.Abstract;
 using SimpleVoice.Handlers;
+using SimpleVoice.Handlers.Abstract;
 
 namespace SimpleVoice.Platforms.Alexa
 {
@@ -61,6 +62,39 @@ namespace SimpleVoice.Platforms.Alexa
         public override string GetClientLocale()
         {
             return Request.Locale;
+        }
+
+        public override PurchaseRequest BuildPurchaseRequest()
+        {
+            EPurchaseResult result = EPurchaseResult.Error;
+            
+            switch (Request.Payload.PurchaseResult)
+            {
+                case "ACCEPTED":
+                    result = EPurchaseResult.Accepted;
+                    break;
+                case "DECLINED":
+                    result = EPurchaseResult.Declined;
+                    break;
+                case "ALREADY_PURCHASED":
+                    result = EPurchaseResult.AlreadyPurchased;
+                    break;
+            }
+            
+            EPurchaseAction action = EPurchaseAction.Error;
+            switch (Request.Name)
+            {
+                case "Buy":
+                    action = EPurchaseAction.Buy;
+                    break;
+                case "Cancel":
+                    action = EPurchaseAction.Cancel;
+                    break;
+            }
+            
+            string productId = Request.Payload.InSkillProduct.ProductId;
+            
+            return new PurchaseRequest(result, action, productId);
         }
     }
 }

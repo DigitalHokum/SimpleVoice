@@ -36,7 +36,7 @@ namespace SimpleVoice.Platforms.Google
             throw new System.NotImplementedException();
         }
 
-        public override ResponseAbstract BuildPurchaseResponseObject(string productId)
+        public override ResponseAbstract BuildPurchaseResponseObject(string productId, string speech)
         {
             throw new System.NotImplementedException();
         }

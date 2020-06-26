@@ -21,41 +21,52 @@ namespace SimpleVoice.Platforms.Alexa
             "sessionAttributes": {}
         }
     }
- */
+    */
+
     public class AlexaResponse : ResponseAbstract
     {
         [JsonProperty("version")]
         public string Version = "1.0";
-        
+
         [JsonProperty("response")]
         public Response Response;
-        
+
         [JsonProperty("sessionAttributes")]
         public Dictionary<string, object> SessionAttributes = new Dictionary<string, object>();
 
         public override void PrepareData()
         {
+            if (DataIsPrepared)
+                return;
+
             Response = new Response()
             {
+                ShouldEndSession = EndSession,
                 OutputSpeech = new OutputSpeech()
                 {
                     Type = "SSML",
                     SSML = $"<speak>{Speech} {Reprompt}</speak>"
-                },
-                Reprompt = new Reprompt()
+                }
+            };
+
+            if (Reprompt != null)
+            {
+                Response.Reprompt = new Reprompt()
                 {
                     OutputSpeech = new OutputSpeech()
                     {
                         Type = "PlainText",
                         Text = Reprompt
                     }
-                }
-            };
+                };
+            }
 
             SessionAttributes = new Dictionary<string, object>()
             {
                 {"launched", true}
             };
+
+            DataIsPrepared = true;
         }
     }
 }

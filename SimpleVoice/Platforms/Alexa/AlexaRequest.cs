@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using SimpleVoice.Abstract;
@@ -26,29 +27,42 @@ namespace SimpleVoice.Platforms.Alexa
             return new AlexaResponse();
         }
 
-        public override ResponseAbstract BuildPurchaseResponseObject(string productId)
+        public override ResponseAbstract BuildPurchaseResponseObject(string productId, string speech)
         {
             AlexaResponse response = (AlexaResponse) BuildResponseObject();
-            response.Response.Directives = new List<Directive>();
-            response.Response.Directives.Add(new Directive()
+            response.Speech = speech;
+            response.EndSession = true;
+            response.PrepareData();
+            
+            response.Response.Directives = new List<Directive>
             {
-                Payload = new DirectivePayload()
+                new Directive()
                 {
-                    InSkillProduct = new InSkillProductDirective()
+                    Type = "Connections.SendRequest",
+                    Name = "Buy",
+                    Token = Guid.NewGuid().ToString(),
+                    Payload = new Dictionary<string, Dictionary<string, object>>()
                     {
-                        ProductId = productId
+                        {"InSkillProduct", new Dictionary<string, object>()
+                            {
+                                {"productId", productId}
+                            }
+                        }
                     }
                 }
-            });
-            
+            };
+
             return response;
         }
 
         public override string GetIntentName()
         {
             if (Request.Type == "IntentRequest")
-                return Request.Intent.Name;    
+                return Request.Intent.Name;
             
+            if (Request.Type == "Connections.Response")
+                return "ConnectionsResponse";
+
             if (Request.Type == "LaunchRequest")
                 return "LaunchRequest";
 
@@ -107,8 +121,10 @@ namespace SimpleVoice.Platforms.Alexa
                     action = EPurchaseAction.Cancel;
                     break;
             }
-            
-            string productId = Request.Payload.InSkillProduct.ProductId;
+
+            string productId = Request.Payload.InSkillProduct == null
+                ? Request.Payload.ProductId
+                : Request.Payload.InSkillProduct.ProductId;
             
             return new PurchaseRequest(result, action, productId);
         }

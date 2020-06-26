@@ -8,7 +8,7 @@ namespace SimpleVoice.Platforms.Alexa.Data.Response
         [JsonProperty("outputSpeech")]
         public OutputSpeech OutputSpeech;
         
-        [JsonProperty("reprompt")]
+        [JsonProperty("reprompt", NullValueHandling = NullValueHandling.Ignore)]
         public Reprompt Reprompt;
         
         [JsonProperty("shouldEndSession")]

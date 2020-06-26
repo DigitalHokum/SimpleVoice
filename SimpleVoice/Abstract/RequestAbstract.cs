@@ -16,6 +16,6 @@ namespace SimpleVoice.Abstract
         public abstract string GetClientLocale();
 
         public abstract PurchaseRequest BuildPurchaseRequest();
-        public abstract ResponseAbstract BuildPurchaseResponseObject(string productId);
+        public abstract ResponseAbstract BuildPurchaseResponseObject(string productId, string speech);
     }
 }

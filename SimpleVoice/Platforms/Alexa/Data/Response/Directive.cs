@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace SimpleVoice.Platforms.Alexa.Data.Response
@@ -6,7 +7,7 @@ namespace SimpleVoice.Platforms.Alexa.Data.Response
     {
         [JsonProperty("type")] public string Type;
         [JsonProperty("name")] public string Name;
-        [JsonProperty("payload")] public DirectivePayload Payload;
         [JsonProperty("token")] public string Token;
+        [JsonProperty("payload")] public Dictionary<string, Dictionary<string, object>> Payload;
     }
 }
